@@ -1,0 +1,35 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="text-center my-3">News List</h2>
+    <a class="btn btn-primary" href="{% url 'addNews' %}">Add News</a>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">content</th>
+          <th scope="col">Thumbnail Image</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for news in news_data %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ news.title }}</td>
+            <td>{{ news.content }}</td>
+            <td>
+                <img src="{{news.thumb_image.url}}" width="100px" alt="thumbnail image">
+            </td>
+            <td>
+              <a class="btn btn-primary" href="{% url 'editNews' news.id %}">Edit</a>
+              <a class="btn btn-danger" href="{% url 'deletenews' news.id %}">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
